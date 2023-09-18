@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% block title %} Results {% endblock %}
+{% load static %}
+{% load scraping_tags %}
+{% block content %}
+<main>
+
+    <!-- Hero Start-->
+    <div class="hero-area2 slider-height2 hero-overly2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>{{request.GET.query|split_then_space:'-'}} Jobs</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Hero End -->
+    <!--================Blog Area =================-->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        {% for job in page_obj %}
+                        <article class="blog_item card hover-shadow">
+                            <div class="blog_details">
+                                <div class="row justify-content-between">
+                                    <div>
+                                        <a class="d-inline-block" href="{{job.link}}" target="_blank">
+                                            <h2 class="d-inline">{{job.title}}</h2>
+                                            {% if job.date %}
+                                            <small style="color: #eb566c;">{{job.date}}</small>
+                                            {% endif %}
+                                        </a>
+                                        {% if job.company and job.location %}
+                                        <div class="mb-3">
+                                            <strong class="mr-1">{{job.company}}</strong>
+                                            <span class="mr-1">-</span>
+                                            <span>{{job.location}}</span>
+                                        </div>
+
+                                        {% endif %}
+                                    </div>
+                                    <div>
+                                        <button>Apply</button>
+                                    </div>
+                                </div>
+
+                                <ul class="blog-info-link pl-0">
+                                    <li><i class="fa fa-clock"></i>{{job.job_type}}</li>
+                                    <li><i class="fa fa-briefcase"></i>{{job.level}}</li>
+                                </ul>
+                            </div>
+                        </article>
+                        {% endfor %}
+                        <nav class="blog-pagination justify-content-center d-flex">
+
+                            <ul class="pagination">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a href="?query={{request.GET.query}}&page={{ page_obj.previous_page_number }}"
+                                        class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+
+                                <li class="page-item p-3">
+                                    Page {{ page_obj.number }} of {{page_obj.paginator.num_pages}}
+                                </li>
+
+                                {% if page_obj.has_next %}
+                                <li class="page-item">
+                                    <a href="?query={{request.GET.query}}&page={{ page_obj.next_page_number }}"
+                                        class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        <aside class="single_sidebar_widget instagram_feeds">
+                            <h4 class="widget_title">More '{{request.GET.query}}' Jobs</h4>
+                            <ul class="instagram_row flex-wrap">
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://www.linkedin.com/jobs/search?keywords={{request.GET.query}}&location=Egypt&geoId=106155005&trk=public_jobs_jobs-search-bar_search-submit&position=1&pageNum=0">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/linkedin.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="LinkedIn">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://www.google.com/search?q={{request.GET.query}}+jobs+in+egypt&oq=djan&aqs=chrome.0.69i59l3j0i131i433i512j46i131i433i512j69i60l3.1018j0j9&sourceid=chrome&ie=UTF-8&ibp=htl;jobs&sa=X&ved=2ahUKEwjGzqK-8tD8AhVtXqQEHebRBbYQudcGKAF6BAgPEBc#htivrt=jobs&htidocid=up9ZW_PsKLEAAAAAAAAAAA%3D%3D&fpstate=tldetail">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/google.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="Google">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://www.glassdoor.com/Job/egypt-{{request.GET.query}}-jobs-SRCH_IL.0,5_IN69_KO6,22.htm">
+                                        <img class="w-50 hover-shadow"
+                                            src="{% static 'assets/img/icon/glassdoor.png' %}" alt=""
+                                            data-toggle="tooltip" data-placement="top" title="Glassdoor">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://www.naukrigulf.com/{{request.GET.query}}-jobs-in-egypt">
+                                        <img class="w-50 hover-shadow"
+                                            src="{% static 'assets/img/icon/naukrigulf.png' %}" alt=""
+                                            data-toggle="tooltip" data-placement="top" title="Naukrigulf">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://wuzzuf.net/a/{{request.GET.query}}-Jobs-in-Egypt">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/wuzzuf.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="Wuzzuf">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://www.bayt.com/en/egypt/jobs/{{request.GET.query}}-jobs/">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/bayt.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="Bayt.com">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://egypt.tanqeeb.com/ar/jobs/search?keywords={{request.GET.query}}&country=213&state=0&search_period=0&order_by=most_recent&search_in=f&lang=all">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/tanqeeb.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="Tanqeeb">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://www.f6s.com/jobs/{{request.GET.query}}-in-egypt">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/f6s.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="F6S">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href=" https://ae.jobsora.com/jobs-{{request.GET.query}}-cairo-egypt">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/jobsora.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="Jobsora">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="d-flex justify-content-center" target="_blank"
+                                        href="https://www.indeed.com/q-{{request.GET.query}}-l-New-Egypt,-NJ-jobs.html?vjk=ba15c452db590f9b">
+                                        <img class="w-50 hover-shadow" src="{% static 'assets/img/icon/indeed.png' %}"
+                                            alt="" data-toggle="tooltip" data-placement="top" title="Indeed">
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

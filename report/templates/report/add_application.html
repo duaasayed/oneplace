@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<main>
+
+    <div class="hero-area2 slider-height2 hero-overly2 d-flex align-items-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="hero-cap text-center pt-50">
+                        <h2>Add Application</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Hero End -->
+    <!--================Blog Area =================-->
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-5 mb-lg-0">
+                    <div class="card shadow p-5">
+                        <form method="POST" action="{% url 'report:add_application' %}">
+                            {% csrf_token %}
+                            {{ form.as_div }}
+                            <button type="submit" class="btn btn-primary">Add</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}

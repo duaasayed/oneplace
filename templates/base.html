@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %} {% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css">
+
+
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico'%}">
+    
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body class="pr-0">
+    <!-- Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <span style="color: #ff3d1c;">loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-area" style="background-color: #010E21;">
+            <div class="main-header">
+                <div class="header-bottom  header-sticky">
+                    <div class="container-fluid">
+                        <div class="row align-items-center">
+                            <!-- Logo -->
+                            <div class="col-xl-2 col-lg-2 col-md-1 py-3">
+                                <div class="logo" style="font-size: 50px; font-family:Sacramento,cursive">
+                                    <a href="{% url 'scrapping:index' %}"><span
+                                            style="color: #ff3d1c;">One</span>place</a>
+                                </div>
+                            </div>
+                            <div class="col-xl-10 col-lg-10 col-md-8">
+                                <!-- Main-menu -->
+                                <div class="main-menu f-right d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li class="add-list" id="my-report"><a href="{% url 'report:show' %}"
+                                                    style="background: #e6373d !important;">
+                                                    My Report</a></li>
+                                            {% if user.is_authenticated %}
+                                            <li><a href="#">Welcome, {{user.first_name}}</a>
+                                                <ul class="submenu">
+                                                    <li>
+                                                        <form method="POST" action="{% url 'accounts:logout' %}">
+                                                            {% csrf_token %}
+                                                            <button type="submit"
+                                                                style="border: none; background: none; color: black;">Logout</button>
+                                                        </form>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            {% else %}
+                                            <li class="login">
+                                                <a href="#" data-toggle="modal" id="showModal" data-target="#modal">
+                                                    <i class="ti-user"></i> Sign in or Register
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    {% include 'accounts/auth.html' %}
+    {% block content %}
+    {% endblock %}
+    <footer>
+        <!-- Footer Start-->
+        <div class="footer-area">
+            <div class="container">
+                <div class="footer-top footer-padding">
+                    <div class="row justify-content-between">
+                        <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="single-footer-caption mb-30">
+                                    <!-- logo -->
+                                    <div class="footer-logo">
+                                        <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Quick Link</h4>
+                                    <ul>
+                                        <li><a href="#">Home</a></li>
+                                        <li><a href="#">Listing</a></li>
+                                        <li><a href="#">About</a></li>
+                                        <li><a href="#">Contact</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Categories</h4>
+                                    <ul>
+                                        <li><a href="#">Reasonable Hotel</a></li>
+                                        <li><a href="#">Popular Restaurant</a></li>
+                                        <li><a href="#">Easy Shopping</a></li>
+                                        <li><a href="#">Night Life</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                            <div class="single-footer-caption mb-50">
+                                <div class="footer-tittle">
+                                    <h4>Download App</h4>
+                                    <ul>
+                                        <li class="app-log"><a href="#"><img src="assets/img/gallery/app-logo.png"
+                                                    alt=""></a></li>
+                                        <li><a href="#"><img src="assets/img/gallery/app-logo2.png" alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="row d-flex justify-content-between align-items-center">
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="footer-copy-right">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                    Copyright &copy;
+                                    <script>document.write(new Date().getFullYear());</script> All rights reserved |
+                                    This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a
+                                        href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-lg-4">
+                            <!-- Footer Social -->
+                            <div class="footer-social f-right">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-globe"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer>
+    <!-- Scroll Up -->
+    <div id="back-top">
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            var myreport = document.getElementById('my-report')
+            console.log('{{request.path}}')
+            if ('{{request.path}}' == '/report/') {
+                myreport.children[0].innerText = 'Add Application'
+                myreport.children[0].href = "{% url 'report:add_application' %}"
+            } else {
+                myreport.children[0].innerText = 'My Report'
+                myreport.children[0].href = "{% url 'report:show' %}"
+            }
+
+
+            var loginForm = document.getElementById('loginForm')
+            var registerForm = document.getElementById('registerForm')
+            var modelTitle = document.getElementById('modalLongTitle')
+
+            var switchToSignUp = document.getElementById('switch')
+            switchToSignUp.addEventListener('click', () => {
+                modelTitle.innerText = 'Sign Up'
+                loginForm.classList.add('d-none')
+                registerForm.classList.remove('d-none')
+            })
+
+            var switchToLogin = document.getElementById('switch2')
+            switchToLogin.addEventListener('click', () => {
+                modelTitle.innerText = 'Sign In'
+                registerForm.classList.add('d-none')
+                loginForm.classList.remove('d-none')
+            })
+
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault()
+
+                const formData = new FormData(e.target);
+
+                axios.defaults.xsrfHeaderName = "X-CSRFToken"
+                axios.defaults.xsrfCookieName = 'csrftoken'
+
+                axios.post('/accounts/register', formData)
+                    .then(response => {
+                        if (response.status == 200) {
+                            modelTitle.innerText = 'Sign In'
+                            registerForm.classList.add('d-none')
+                            loginForm.classList.remove('d-none')
+                        }
+                    })
+            })
+
+            myreport.addEventListener('click', (e) => {
+                e.preventDefault()
+                if ('{{user.is_authenticated}}' == 'False') {
+                    var showModal = document.getElementById('showModal')
+                    showModal.click()
+                } else {
+                    location.href = myreport.children[0].href
+                }
+            })
+        })
+    </script>
+    {% block extrascripts %} {% endblock %}
+    <!-- JS here -->
+    <!-- All JS Custom Plugins Link Here here -->
+    <script src="{% static 'assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'assets/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/animated.headline.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
+
+    <!-- Nice-select, sticky -->
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.sticky.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static 'assets/js/contact.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.form.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'assets/js/mail-script.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

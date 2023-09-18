@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %} One Place {% endblock %}
+{% load static %}
+{% block content %}
+<main>
+
+    <!-- Hero Area Start-->
+    <div class="slider-area hero-overly">
+        <div class="single-slider hero-overly  slider-height d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-8 col-lg-9">
+                        <!-- Hero Caption -->
+                        <div class="hero__caption">
+                            <span>Find the Best Jobs in Egypt</span>
+                            <h1>Search for vacancies & career opportunities</h1>
+                        </div>
+                        <!--Hero form -->
+                        <form action="{% url 'scrapping:search' %}" method="POST" class="search-box">
+                            {% csrf_token %}
+                            <div class="input-form">
+                                <input type="text" name="q" placeholder="What are you looking for?">
+                            </div>
+                            <div class="search-form">
+                                <input type="submit" value="Search">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+
+{% endblock %}

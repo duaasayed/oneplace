@@ -1,0 +1,69 @@
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLongTitle">Sign In</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="POST" action="{% url 'accounts:login' %}" id="loginForm">
+                {% csrf_token %}
+
+                <div class="modal-body">
+                    <p>
+                        Don't have an account yet? <a href="#" id="switch" style="color: #ff3d1c;">sign
+                            up</a> now.
+                    </p>
+                    <div class="form-group">
+                        <label form="email" class="form-label">Email </label>
+                        <input type="email" name="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label form="password" class="form-label">Password </label>
+                        <input type="password" name="password" class="form-control" id="password" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                </div>
+            </form>
+            <form method="POST" action="{% url 'accounts:register' %}" class="d-none" id="registerForm">
+                {% csrf_token %}
+
+                <div class="modal-body">
+                    <p>
+                        Already have an account? <a href="#" id="switch2" style="color: #ff3d1c;">sign
+                            In</a> now.
+                    </p>
+                    <div class="row justify-content-between">
+                        <div class="form-group col-md-6">
+                            <label form="first_name" class="form-label">First Name </label>
+                            <input type="text" name="first_name" class="form-control" id="first_name" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label form="last_name" class="form-label">Last Name </label>
+                            <input type="text" name="last_name" class="form-control" id="last_name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label form="email" class="form-label">Email </label>
+                        <input type="email" name="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label form="password1" class="form-label">Password </label>
+                        <input type="password" name="password1" class="form-control" id="password1" required>
+                    </div>
+                    <div class="form-group">
+                        <label form="password2" class="form-label">Password (again) </label>
+                        <input type="password" name="password2" class="form-control" id="password2" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
